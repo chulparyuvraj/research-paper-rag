@@ -1,5 +1,5 @@
 import os, time, urllib.request
-import fitz
+import pymupdf as fitz
 
 # arXiv ID -> what we INTEND it to be (we verify below)
 PAPERS = {

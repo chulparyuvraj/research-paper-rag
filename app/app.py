@@ -1,3 +1,10 @@
+try:
+    import spaces
+    gpu = spaces.GPU(duration=30)
+except ImportError:  # running locally without the package
+    def gpu(fn):
+        return fn
+
 import gradio as gr
 
 from generate import answer
@@ -21,12 +28,24 @@ def format_hits(hits, max_chars=400):
     return "\n".join(parts)
 
 
+@gpu
+def retrieve(question, mode, k):
+    hits = retriever.search(question, mode=mode, k=k)
+    rel = retriever.relevance(question, hits)
+    return hits, rel
+
+
+@gpu
+def compare_search(question):
+    return [retriever.search(question, mode=m, k=3)
+            for m in ["bm25", "dense", "hybrid", "rerank"]]
+
+
 def ask(question, mode, k):
     question = (question or "").strip()
     if not question:
         return "Please type a question.", ""
-    hits = retriever.search(question, mode=mode, k=int(k))
-    rel = retriever.relevance(question, hits)
+    hits, rel = retrieve(question, mode, int(k))
     if rel is not None and rel < MIN_RELEVANCE:
         msg = (
             "I could not find this in the provided documents.\n\n"
@@ -40,10 +59,7 @@ def compare(question):
     question = (question or "").strip()
     if not question:
         return ["Please type a question."] * 4
-    return [
-        format_hits(retriever.search(question, mode=m, k=3), max_chars=250)
-        for m in ["bm25", "dense", "hybrid", "rerank"]
-    ]
+    return [format_hits(h, max_chars=250) for h in compare_search(question)]
 
 
 with gr.Blocks(title="Research Paper RAG") as demo:
