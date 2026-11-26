@@ -1,0 +1,41 @@
+{
+  "questions": [
+    {"id": 1, "type": "K", "expected": ["2512.20363.pdf"], "question": "How does Clust-PSI-PFL choose the number of clusters?"},
+    {"id": 2, "type": "P", "expected": ["2512.20363.pdf"], "question": "How do the authors measure how different the clients' data distributions are from each other?"},
+    {"id": 3, "type": "K", "expected": ["2512.20363.pdf"], "question": "By how much does Clust-PSI-PFL improve client fairness under severe non-IID conditions?"},
+    {"id": 4, "type": "P", "expected": ["1602.05629.pdf", "2003.00295.pdf"], "question": "How does FedAvg combine client updates on the server?"},
+    {"id": 5, "type": "K", "expected": ["1602.05629.pdf"], "question": "Which datasets were used to evaluate federated averaging?"},
+    {"id": 6, "type": "P", "expected": ["1602.05629.pdf"], "question": "Why does averaging the weights of independently trained neural networks work in federated learning?"},
+    {"id": 7, "type": "K", "expected": ["1812.06127.pdf"], "question": "What does the proximal term in FedProx do?"},
+    {"id": 8, "type": "P", "expected": ["1812.06127.pdf"], "question": "How does FedProx handle devices that cannot finish the required amount of local computation?"},
+    {"id": 9, "type": "K", "expected": ["1812.06127.pdf"], "question": "What datasets were used to evaluate FedProx?"},
+    {"id": 10, "type": "K", "expected": ["2003.00295.pdf"], "question": "Which adaptive server optimizers are proposed for federated learning?"},
+    {"id": 11, "type": "P", "expected": ["2003.00295.pdf"], "question": "How can the server treat the averaged client change as a gradient and apply a standard optimizer?"},
+    {"id": 12, "type": "K", "expected": ["2003.00295.pdf"], "question": "What do ClientOpt and ServerOpt do in the general FedOpt framework?"},
+    {"id": 13, "type": "K", "expected": ["1910.01991.pdf"], "question": "How does clustered federated learning group clients?"},
+    {"id": 14, "type": "P", "expected": ["1910.01991.pdf"], "question": "Does the method require specifying how many client groups there will be beforehand?"},
+    {"id": 15, "type": "P", "expected": ["1910.01991.pdf"], "question": "When during training is the federation split into subgroups?"},
+    {"id": 16, "type": "K", "expected": ["2005.11401.pdf"], "question": "What is the difference between RAG-Sequence and RAG-Token?"},
+    {"id": 17, "type": "P", "expected": ["2005.11401.pdf"], "question": "What kind of memory stores the Wikipedia knowledge that the generator can look up?"},
+    {"id": 18, "type": "P", "expected": ["2005.11401.pdf"], "question": "How can the knowledge of a RAG model be updated without retraining it?"},
+    {"id": 19, "type": "K", "expected": ["2312.10997.pdf"], "question": "What distinguishes Naive RAG, Advanced RAG and Modular RAG?"},
+    {"id": 20, "type": "P", "expected": ["2312.10997.pdf"], "question": "Beyond answer accuracy, what abilities are used to check a RAG system, such as handling noisy documents?"},
+    {"id": 21, "type": "K", "expected": ["2312.10997.pdf"], "question": "What are the key components of RAG: retrieval, generation and augmentation?"},
+    {"id": 22, "type": "K", "expected": ["2403.10131.pdf"], "question": "What is Retrieval Augmented Fine Tuning?"},
+    {"id": 23, "type": "P", "expected": ["2403.10131.pdf"], "question": "Why does the training data include some questions where the correct document is missing?"},
+    {"id": 24, "type": "K", "expected": ["2403.10131.pdf"], "question": "Which datasets did RAFT evaluate on?"},
+    {"id": 25, "type": "K", "expected": ["2309.15217.pdf", "2312.10997.pdf"], "question": "What metrics does RAGAS use to evaluate a RAG pipeline?"},
+    {"id": 26, "type": "P", "expected": ["2309.15217.pdf"], "question": "How can answer quality be judged without human-written reference answers?"},
+    {"id": 27, "type": "K", "expected": ["2309.15217.pdf"], "question": "How is answer relevance computed in RAGAS?"},
+    {"id": 28, "type": "K", "expected": ["2004.07180.pdf"], "question": "How does SPECTER learn document-level embeddings from citations?"},
+    {"id": 29, "type": "P", "expected": ["2004.07180.pdf"], "question": "How are hard negative examples chosen when training the scientific-paper embedding model?"},
+    {"id": 30, "type": "K", "expected": ["2004.07180.pdf"], "question": "What benchmark was used to evaluate SPECTER?"}
+  ],
+  "off_topic": [
+    "What is the capital of France?",
+    "Who won the 2022 football World Cup?",
+    "Give me a recipe for chocolate cake.",
+    "What accuracy does Llama 3 get on the MMLU benchmark?",
+    "What is the boiling point of water at sea level?"
+  ]
+}
