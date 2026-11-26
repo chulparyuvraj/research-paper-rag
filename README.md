@@ -34,13 +34,24 @@ PDFs → page text → 512-char chunks (64 overlap)
 - **Model fallback:** if one LLM is unavailable or rate-limited, the next is tried.
 - **Deployment:** free Hugging Face Gradio Spaces run on ZeroGPU, so the search step is wrapped in `@spaces.GPU`. The models themselves run on CPU.
 
-## Observations (informal, a handful of manual queries, not a benchmark)
+## Evaluation
 
-- SPECTER2 is trained for paper-to-paper similarity and sometimes returns off-topic chunks for short questions.
-- With 0.6/0.4 RRF weights, hybrid results mostly mirror dense results.
-- BM25 without stopword removal can match generic words ("how", "combine").
-- Name variants hurt retrieval: "FedAvg" vs "FederatedAveraging".
-- A proper evaluation on a labelled question set is in progress.
+30 labelled questions (17 keyword-style, 13 paraphrased) over the 10 papers. A hit means a retrieved chunk from the expected paper (paper-level, so lenient). One question is 3.3 points, so gaps under about 10 points are within noise.
+
+| Pipeline | R@1 | R@5 | MRR@10 |
+|---|---|---|---|
+| BM25 | 0.83 | 0.93 | 0.87 |
+| Dense (SPECTER2) | 0.60 | 0.87 | 0.69 |
+| Hybrid (RRF) | 0.67 | 0.93 | 0.77 |
+| Hybrid + rerank | 0.83 | 0.97 | 0.88 |
+| BM25 ∪ dense + rerank (default) | 0.90 | 1.00 | 0.93 |
+
+- SPECTER2 is clearly the weakest retriever for question-to-chunk search.
+- With 0.6/0.4 RRF weights, BM25's best chunk was sometimes cut before the reranker saw it. Giving the reranker the union of both candidate lists fixed that failure, and R@5 reached 1.0. The R@1 gain (+2 questions) is within noise.
+- BM25 stopword removal was tested and gave no net gain, so it wasn't adopted.
+- Relevance gate (cutoff -6): 1 of 30 in-scope questions wrongly refused, 4 of 5 off-topic questions refused. A near-topic question about Llama 3 on MMLU passes the gate.
+
+Caveats: labels were drafted with an AI assistant and reviewed only on failures, and the pool fix was developed on this same question set, so numbers are somewhat optimistic. A held-out set is the next step.
 
 ## Limitations
 
