@@ -49,7 +49,7 @@ PDFs → page text → 512-char chunks (64 overlap)
 - SPECTER2 is clearly the weakest retriever for question-to-chunk search.
 - With 0.6/0.4 RRF weights, BM25's best chunk was sometimes cut before the reranker saw it. Giving the reranker the union of both candidate lists fixed that failure, and R@5 reached 1.0. The R@1 gain (+2 questions) is within noise.
 - BM25 stopword removal was tested and gave no net gain, so it wasn't adopted.
-- Relevance gate (cutoff -6): 1 of 30 in-scope questions wrongly refused, 4 of 5 off-topic questions refused. A near-topic question about Llama 3 on MMLU passes the gate.
+- - Relevance gate (cutoff -6): 1 of 30 in-scope questions wrongly refused, 4 of 5 off-topic questions refused. The one near-topic question that passed the gate (Llama 3 accuracy on MMLU) was refused by the LLM's grounded prompt ("I could not find this in the provided documents"). That is a single check, not a measured rate.
 
 Caveats: labels were drafted with an AI assistant and reviewed only on failures, and the pool fix was developed on this same question set, so numbers are somewhat optimistic. A held-out set is the next step.
 
